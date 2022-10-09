@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.noteapp.feature_note.domain.model.Note
 import com.example.noteapp.feature_note.domain.use_case.NoteUseCases
 import com.example.noteapp.feature_note.domain.util.NoteOrder
+import com.example.noteapp.feature_note.domain.util.OrderType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
@@ -25,6 +26,10 @@ class NotesViewModel @Inject constructor(
     private var recentlyDeletedNote: Note? = null
 
     private var getNotesJob: Job? = null
+
+    init {
+        getNotes(NoteOrder.Date(OrderType.Descending))
+    }
 
     fun onEvent(event: NotesEvent) {
         when (event) {
